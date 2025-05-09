@@ -5,31 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>我们的恋爱日记🌸</title>
     <style>
-        /* 基础样式 */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: linear-gradient(45deg, #ffb6c1, #ff69b4);
-            font-family: 'Microsoft YaHei', cursive;
-            min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        /* 樱花飘落动画 */
-        .sakura {
+        /* 新增导航栏样式 */
+        .nav-container {
             position: fixed;
-            width: 10px;
-            height: 10px;
-            background: #fff;
-            border-radius: 50% 50% 0 50%;
-            transform: rotate(-45deg);
-            pointer-events: none;
-            animation: fall linear infinite;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            padding: 15px 0;
+        }
+
+        .nav-item {
+            margin: 0 30px;
+            font-size: 1.2em;
+            color: #ff69b4;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            text-decoration: none;
+        }
+
+        .nav-item:hover {
+            transform: translateY(-2px);
+            color: #ff1493;
+        }
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ff69b4;
+            transition: width 0.3s;
+        }
+
+        .nav-item:hover::after {
+            width: 100%;
+        }
+
+        /* 调整樱花效果 */
+        .sakura {
+            width: 15px;  /* 调大花瓣尺寸 */
+            height: 15px;
+            animation-duration: 8s !important;  /* 减慢飘落速度 */
         }
 
         @keyframes fall {
@@ -38,137 +64,75 @@
                 opacity: 1;
             }
             100% {
-                transform: translateY(110vh) rotate(360deg);
-                opacity: 0;
+                transform: translateY(110vh) rotate(720deg);  /* 增加旋转角度 */
+                opacity: 0.3;  /* 调低最终透明度 */
             }
-        }
-
-        /* 主容器 */
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* 标题样式 */
-        .header {
-            text-align: center;
-            padding: 40px 0;
-            color: #fff;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-        }
-
-        .header h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
-        }
-
-        /* 时间轴样式 */
-        .timeline {
-            position: relative;
-            padding: 20px 0;
-        }
-
-        .timeline-item {
-            background: rgba(255,255,255,0.9);
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px 0;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            position: relative;
-            transition: transform 0.3s;
-        }
-
-        .timeline-item:hover {
-            transform: translateY(-5px);
-        }
-
-        /* 照片墙 */
-        .photo-wall {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 10px;
-            margin: 20px 0;
-        }
-
-        .photo {
-            width: 100%;
-            height: 150px;
-            border-radius: 10px;
-            object-fit: cover;
-            transition: transform 0.3s;
-        }
-
-        .photo:hover {
-            transform: scale(1.05);
-        }
-
-        /* 爱心点击特效 */
-        .heart {
-            position: absolute;
-            pointer-events: none;
-            animation: float 2s ease-out;
-        }
-
-        @keyframes float {
-            0% { opacity: 1; transform: translateY(0); }
-            100% { opacity: 0; transform: translateY(-100px); }
         }
     </style>
 </head>
 <body>
-    <!-- 樱花飘落 -->
-    <div class="sakura-container"></div>
+    <!-- 新增导航栏 -->
+    <div class="nav-container">
+        <nav class="nav-menu">
+            <a href="#about" class="nav-item">About ❤</a>
+            <a href="#daily" class="nav-item">Daily 🌸</a>
+            <a href="#memory" class="nav-item">Memory 📷</a>
+        </nav>
+    </div>
 
+    <!-- 原有容器中添加锚点 -->
     <div class="container">
-        <div class="header">
+        <div class="header" id="about">
             <h1>🌸 我们的恋爱日记 🌸</h1>
             <p>从第一次相遇开始的每一天</p>
         </div>
 
-        <!-- 时间轴 -->
-        <div class="timeline">
+        <!-- 新增每日记录板块 -->
+        <section id="daily" class="timeline">
             <div class="timeline-item">
-                <h3>第一次相遇</h3>
-                <p>2023.03.14 在樱花盛开的季节遇见你</p>
+                <h3>今日甜蜜时刻</h3>
+                <p>2023.10.20 一起看落日余晖</p>
                 <div class="photo-wall">
-                    <img src="placeholder1.jpg" class="photo" alt="相遇">
+                    <img src="daily1.jpg" class="photo" alt="今日记录">
                 </div>
             </div>
+        </section>
 
-            <div class="timeline-item">
-                <h3>第一次约会</h3>
-                <p>2023.04.01 游乐园的旋转木马</p>
-                <div class="photo-wall">
-                    <img src="placeholder2.jpg" class="photo" alt="约会">
-                </div>
+        <!-- 新增回忆相册板块 -->
+        <section id="memory" class="timeline">
+            <h2 style="color: #ff69b4; text-align: center; margin: 40px 0">回忆相册</h2>
+            <div class="photo-wall">
+                <img src="memory1.jpg" class="photo" alt="回忆1">
+                <img src="memory2.jpg" class="photo" alt="回忆2">
+                <img src="memory3.jpg" class="photo" alt="回忆3">
             </div>
-        </div>
+        </section>
     </div>
 
     <script>
-        // 樱花飘落
+        // 调整樱花生成速度（减慢）
         function createSakura() {
             const sakura = document.createElement('div');
             sakura.className = 'sakura';
             sakura.style.left = Math.random() * 100 + 'vw';
-            sakura.style.animationDuration = Math.random() * 3 + 2 + 's';
+            sakura.style.animationDuration = Math.random() * 5 + 8 + 's'; // 减慢飘落速度
+            // 添加随机颜色变化
+            sakura.style.background = `rgba(255,${Math.random()*55+200},${Math.random()*55+200},0.8)`;
             document.querySelector('.sakura-container').appendChild(sakura);
-            setTimeout(() => sakura.remove(), 5000);
+            setTimeout(() => sakura.remove(), 10000);
         }
-        setInterval(createSakura, 300);
+        setInterval(createSakura, 500); // 减少生成频率
 
-        // 爱心点击特效
-        document.addEventListener('click', (e) => {
-            const heart = document.createElement('div');
-            heart.className = 'heart';
-            heart.innerHTML = '❤️';
-            heart.style.left = e.pageX + 'px';
-            heart.style.top = e.pageY + 'px';
-            document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 2000);
+        // 平滑滚动导航
+        document.querySelectorAll('.nav-item').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                document.querySelector(targetId).scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
         });
     </script>
 </body>
